@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+        .table-responsive {
+            margin: 30px 0;
+        }
+        .table-wrapper {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 3px;
+            min-width: 1000px;
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        }
+        .table-title {        
+            padding-bottom: 15px;
+            background: #435d7d;
+            color: #fff;
+            padding: 16px 30px;
+            min-width: 100%;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+        .table-title .btn-group {
+            float: right;
+        }
+        .table-title .btn {
+            color: #fff;
+            float: right;
+            font-size: 13px;
+            border: none;
+            min-width: 50px;
+            border-radius: 2px;
+            border: none;
+            outline: none !important;
+            margin-left: 10px;
+        }
+        .table-title .btn i {
+            float: left;
+            font-size: 21px;
+            margin-right: 5px;
+        }
+        .table-title .btn span {
+            float: left;
+            margin-top: 2px;
+        }
+        table.table tr th, table.table tr td {
+            border-color: #e9e9e9;
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+        table.table tr th:first-child {
+            width: 60px;
+        }
+        table.table tr th:last-child {
+            width: 100px;
+        }
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+        table.table-striped.table-hover tbody tr:hover {
+            background: #f5f5f5;
+        }
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }	
+        table.table td:last-child i {
+            opacity: 0.9;
+            font-size: 22px;
+            margin: 0 5px;
+        }
+        table.table td a {
+            font-weight: bold;
+            color: #566787;
+            display: inline-block;
+            text-decoration: none;
+            outline: none !important;
+        }
+        table.table td a:hover {
+            color: #2196F3;
+        }
+        table.table td a.edit {
+            color: #FFC107;
+        }
+        table.table td a.delete {
+            color: #F44336;
+        }
+        table.table td i {
+            font-size: 19px;
+        }
+        table.table .avatar {
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .pagination {
+            float: right;
+            margin: 0 0 5px;
+        }
+        .pagination li a {
+            border: none;
+            font-size: 13px;
+            min-width: 30px;
+            min-height: 30px;
+            color: #999;
+            margin: 0 2px;
+            line-height: 30px;
+            border-radius: 2px !important;
+            text-align: center;
+            padding: 0 6px;
+        }
+        .pagination li a:hover {
+            color: #666;
+        }	
+        .pagination li.active a, .pagination li.active a.page-link {
+            background: #03A9F4;
+        }
+        .pagination li.active a:hover {        
+            background: #0397d6;
+        }
+        .pagination li.disabled i {
+            color: #ccc;
+        }
+        .pagination li i {
+            font-size: 16px;
+            padding-top: 6px
+        }
+        .hint-text {
+            float: left;
+            margin-top: 10px;
+            font-size: 13px;
+        }    
+        /* Custom checkbox */
+        .custom-checkbox {
+            position: relative;
+        }
+        .custom-checkbox input[type="checkbox"] {    
+            opacity: 0;
+            position: absolute;
+            margin: 5px 0 0 3px;
+            z-index: 9;
+        }
+        .custom-checkbox label:before{
+            width: 18px;
+            height: 18px;
+        }
+        .custom-checkbox label:before {
+            content: '';
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: text-top;
+            background: white;
+            border: 1px solid #bbb;
+            border-radius: 2px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 3px;
+            width: 6px;
+            height: 11px;
+            border: solid #000;
+            border-width: 0 3px 3px 0;
+            transform: inherit;
+            z-index: 3;
+            transform: rotateZ(45deg);
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:before {
+            border-color: #03A9F4;
+            background: #03A9F4;
+        }
+        .custom-checkbox input[type="checkbox"]:checked + label:after {
+            border-color: #fff;
+        }
+        .custom-checkbox input[type="checkbox"]:disabled + label:before {
+            color: #b8b8b8;
+            cursor: auto;
+            box-shadow: none;
+            background: #ddd;
+        }
+        /* Modal styles */
+        .modal .modal-dialog {
+            max-width: 400px;
+        }
+        .modal .modal-header, .modal .modal-body, .modal .modal-footer {
+            padding: 20px 30px;
+        }
+        .modal .modal-content {
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .modal .modal-footer {
+            background: #ecf0f1;
+            border-radius: 0 0 3px 3px;
+        }
+        .modal .modal-title {
+            display: inline-block;
+        }
+        .modal .form-control {
+            border-radius: 2px;
+            box-shadow: none;
+            border-color: #dddddd;
+        }
+        .modal textarea.form-control {
+            resize: vertical;
+        }
+        .modal .btn {
+            border-radius: 2px;
+            min-width: 100px;
+        }	
+        .modal form label {
+            font-weight: normal;
+        }	
+        </style>
+
+</head>
+<body ng-app="application" ng-controller="controller" style="background-image: url('./2773_ho_00_p_1024x768.jpg');">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./test1.html">  Client Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="./NewClient.html">New Client</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./ListClient.html">List Client</a>
+            </li>
+           
+            <li class="nav-item active">
+                <a class="nav-link">Reserve Room</a>
+              </li>
+          </ul>
+          
+        </div>
+      </nav>
+
+
+      <div class="container-xl">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>Manage <b>Reserving</b></h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Reserve</span></a>
+                            <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                <div id="alert" ng-class="alert.class" ng-bind="alert.message" class="alert font-weight-bold text-center" role="alert">
+                </div>
+                <table class="table table-striped table-hover"   id="eeee">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="selectAll">
+                                    <label for="selectAll"></label>
+                                </span>
+                            </th>
+                            <th>Client</th>
+                            <th>Room</th>
+                            
+                            <th>Number nights</th>
+                            <th>Prix Totale</th>
+                            <th>Room Type</th>
+                            <th>Smoking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="a in Reserve">
+                            <td>
+                                <span class="custom-checkbox">
+                                    <input type="checkbox" id="checkbox1" name="options[]" value="1">
+                                    <label for="checkbox1"></label>
+                                </span>
+                            </td>
+                            <td>{{a.Name}} </td>
+                            <td ng-bind="a.room"> </td>
+                            <td ng-bind="a.numberNight"></td>
+                            <td>{{a.PrixTotal}} $</td>
+                            <td ng-bind="a.roomType"></td>
+                            <td ng-bind="a.smoking"></td>
+
+
+                            
+                            <td>
+                                <a href="#editEmployeeModal" class="edit" data-toggle="modal" ng-click="editReserve(a.Name,a.room,a.numberNight,a.roomType,a.smoking)"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+<!----                                <button class="delete" data-toggle="modal" ng-click="deleteClient(a.Phone)" >Delete</button>-->
+                                <a href="#deleteEmployeeModal" class="delete" ng-click="deleteReserve(a.room)" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                        
+                       
+                    </tbody>
+                </table>
+                <div class="clearfix">
+                    
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a href="#">Previous</a></li>
+                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                        <li class="page-item"><a href="#" class="page-link">3</a></li>
+                        <li class="page-item"><a href="#" class="page-link">4</a></li>
+                        <li class="page-item"><a href="#" class="page-link">5</a></li>
+                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                    </ul>
+                </div>
+            </div></div>
+        </div>        
+    </div>
+    <div id="addEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">						
+                        <h4 class="modal-title">Add Reserve</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body" ng-app="application" ng-controller="controller">	
+                        <div id="alert" ng-class="alert.class" ng-bind="alert.message" class="alert font-weight-bold text-center" role="alert" >
+                        </div>	
+                        <div class="form-group">
+                            <label>Client</label>
+                        
+
+
+
+                        
+
+
+                        <select ng-options="Client.Name for Client in Client"  class="form-control" autocomplete="off" ng-disabled="submitted"  ng-model="Reserves.clientt">
+                            <option value="">-- Choose Client --</option>
+                          </select>
+                    </div>
+                    
+
+                        <div class="form-group">
+                            <label>Room</label>
+                            <input type="number" class="form-control" ng-model="Reserves.room" autocomplete="off" ng-disabled="submitted" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Start</label>
+                            <input type="date" class="form-control" ng-model="Reserves.date" autocomplete="off" ng-disabled="submitted" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>End</label>
+                            <input type="date" class="form-control" ng-model="Reserves.end" autocomplete="off" ng-disabled="submitted" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Number nights</label>
+                            <label class="form-control" ng-model="Reserves.numberNight">{{(Reserves.end-Reserves.date)/86400000}}</label>
+                        </div>		
+                        <div class="form-group">
+                            <label>Room Type</label>
+                         <!--   <input type="text" class="form-control" ng-model="Reserve.roomType" autocomplete="off" ng-disabled="submitted" required="required">-->
+                            <select  class="form-control" autocomplete="off" ng-disabled="submitted"  ng-model="Reserves.roomType">
+                                <option value="">-- Choose Type Room --</option>
+                                <option value="Single">Single</option>
+                                <option value="Double">Double</option>
+                                <option value="Family">Family</option>
+                              </select>
+                        </div>	
+                        <div class="form-group">
+                            <label>Smoking</label>
+                            <select  class="form-control" autocomplete="off" ng-disabled="submitted"  ng-model="Reserves.smoking">
+                                <option value="">-- Are you smoking --</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                              </select>
+                        </div>
+                    			
+                    
+                    <div class="modal-footer" ng-hide="submitted">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <button    class="btn btn-success" ng-click="saveReserve(Reserves.clientt,Reserves.room,Reserves.date,Reserves.end,Reserves.numberNight,Reserves.roomType,Reserves.smoking)">Save</button>
+                        <div><br></div></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="editEmployeeModal" class="modal fade" ng-repeat="aa in ReserveEdit">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">						
+                        <h4 class="modal-title">Edit Client</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">	
+                        <div class="form-group">
+                      <!--  <select ng-options="Client.Name for Client in Client"  class="form-control" autocomplete="off" ng-disabled="submitted"  ng-model="aa.clientt">
+                            <option value="{{aa.Name}}"></option>
+                          </select>-->
+                          <label  class="form-control" >{{aa.Name}}</label>
+                          </div>
+                        <div class="form-group">
+                            <label>Room</label>
+                            <input type="number" class="form-control" ng-model="aa.room" autocomplete="off" ng-disabled="submitted" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Start</label>
+                            <input type="date" class="form-control" ng-model="aa.date" autocomplete="off" ng-disabled="submitted" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>End</label>
+                            <input type="date" class="form-control" ng-model="aa.end" autocomplete="off" ng-disabled="submitted" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Number nights</label>
+                            <label class="form-control" ng-model="aa.numberNight">{{(aa.end-aa.date)/86400000}}</label>
+                        </div>		
+                        <div class="form-group">
+                            <label>Room Type</label>
+
+                            <select  class="form-control" autocomplete="off" ng-disabled="submitted"  ng-model="aa.roomType">
+                                <option value="{{aa.roomType}}">{{aa.roomType}}</option>
+                                <option value="Single">Single</option>
+                                <option value="Double">Double</option>
+                                <option value="Family">Family</option>
+                              </select>
+
+
+                        </div>	
+                        <div class="form-group">
+                            <label>Smoking</label>
+                            <select  class="form-control" autocomplete="off" ng-disabled="submitted"  ng-model="aa.smoking">
+                                <option value="{{aa.smoking}}">{{aa.smoking}}</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                              </select>
+                        </div>
+                        					
+                    </div>					
+                    </div>
+                    
+                    <div class="modal-footer" ng-hide="submitted">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" >
+                        <button class="btn btn-dark" ng-click="saveReserveEditt(aa.clientt,aa.room,aa.date,aa.end,aa.roomType,aa.smoking)">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal HTML -->
+    <div id="deleteEmployeeModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">						
+                        <h4 class="modal-title">Delete Client</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">					
+                        <p>Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                       <!-- <input type="submit" class="btn btn-danger" ng-click="deleteClientFinal()" >-->
+                        <a id="link-1" class="btn btn-danger" href="#eeee" ng-click="deleteReserveFinal()">Delete</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-database.js"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyCC05rGYw8lEsai7vQt-A2c14t7O0XMsdc",
+          authDomain: "firstapp-7acda.firebaseapp.com",
+          databaseURL: "https://firstapp-7acda-default-rtdb.firebaseio.com",
+          projectId: "firstapp-7acda",
+          storageBucket: "firstapp-7acda.appspot.com",
+          messagingSenderId: "549300940823",
+          appId: "1:549300940823:web:76e20d911290cf75bc6c52",
+          measurementId: "G-PZYZ84ECL6"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        
+      </script>
+	
+	
+	<script src="index.js"></script>
+
+</html>
